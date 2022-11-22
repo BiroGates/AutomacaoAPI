@@ -18,11 +18,10 @@ class Worker {
         pastas.then((item) => {
             item.forEach(element => {
                 let newPath = path + `\\${element}`
-                let debug = 3000
-                this.listarPastas(newPath).then((tcc) => {
-                    console.log(newPath + '\\' + tcc);
-                    execSync(`cd ${newPath}\\${tcc} && pm2 start npm --name "${tcc}" -- start`, {shell: true});
-                    debug++;
+                this.listarPastas(newPath).then((item) => {
+                    item.forEach((tcc)=>{
+                        execSync(`cd ${newPath}\\${tcc} && pm2 start npm --name "${tcc}" -- start`, {shell: true});
+                    })
                 });
             });
         });
